@@ -1,0 +1,19 @@
+module: src.client.agents.LmdeployAgent
+parameters:
+  model_name: "base"
+  model_url: "http://192.168.224.35:23333"
+  # 47.117.64.181:8001
+  # agentflan-v2_d0424rc1: 192.168.237.147
+  # agentflan-v2_d0424rc2: 192.168.237.102
+  # agentflan-v2_d0424rc4: 192.168.224.35
+  # agentflan-v2_d0424rc5: 192.168.225.191
+  # agentflan-v2_d0424rc6: 192.168.224.38
+  # agentflan-v2_d0424rc7: 192.168.237.102
+  # agentflan-v2_d0424rc8: 192.168.237.147
+  # agentflan-v2_d0424rc9: 192.168.224.35
+  max_new_tokens: 512
+  top_p: 0.8
+  top_k: 100
+  temperature: 0
+  repetition_penalty: 1.0
+  stop_words: ["<|im_end|>"]

@@ -1,8 +1,9 @@
 default:
   module: src.server.tasks.card_game.CardGame
-  docker:
-    image: longinyu/agentbench-card_game
+  # docker:
+  #   image: longinyu/agentbench-card_game
   parameters:
+    controller_address: "http://192.168.238.200:7000/api"
     port: 12347
     workers: 10
 

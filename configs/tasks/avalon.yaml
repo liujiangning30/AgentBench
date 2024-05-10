@@ -1,6 +1,7 @@
 default:
   module: "src.server.tasks.avalon.AvalonBench"
   parameters:
+    controller_address: "http://192.168.224.38:3000/api"
     concurrency: 5
     num_players: 5
     discussion: False

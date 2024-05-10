@@ -21,60 +21,102 @@ from src.typings import (
 )
 
 
-class DummyOutput:
-    def __init__(self, stdout, stderr, exit_code):
-        self.output = stdout.encode()  # 模拟 Docker SDK 的输出为字节串
-        self.exit_code = exit_code
-        self.stderr = stderr.encode()
-
-
 class Container:
-    def execute(self, command: str):
-        # 使用 subprocess.run 执行命令
-        result = subprocess.run(
-            command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
+    def __init__(self, image):
+        self.image = image
+        self.client = docker.from_env()
+        self.container: docker.models.containers.Container = self.client.containers.run(
+            image,
+            detach=True,
+            tty=True,
+            stdin_open=True,
+            remove=True,
+            labels={"created_by": "os-pipeline"},
         )
-        return DummyOutput(result.stdout, result.stderr, result.returncode)
+        self.exec_id = self.client.api.exec_create(
+            self.container.id, "bash --login", stdin=True, tty=True
+        )["Id"]
+        self.sock = self.client.api.exec_start(self.exec_id, socket=True)._sock
+        self.sock.settimeout(5)
+        # clear buffer
+        self.sock.recv(1000)
+
+    def __del__(self):
+        try:
+            self.container.stop()
+        except:
+            pass
+
+    def execute(self, command: str):
+        class DummyOutput:
+            output: bytes
+            exit_code: int
+
+            def __init__(self, code, o):
+                self.output = o
+                self.exit_code = code
+
+        # print("=== EXECUTING ===\n", command)
+        if not isinstance(command, str):
+            return DummyOutput(-1, b"")
+        self.sock.send(command.encode("utf-8") + b"\n")
+        # ignore input line
+        data = self.sock.recv(8)
+        _, n = struct.unpack(">BxxxL", data)
+        _ = self.sock.recv(n)
+        output = b""
+        while True:
+            try:
+                data = self.sock.recv(8)
+                # print(data)
+                if not data:
+                    break
+                _, n = struct.unpack(">BxxxL", data)
+                line = self.sock.recv(n)
+                output += line
+                if re.search(b"\x1b.+@.+[#|$] ", line):
+                    break
+            except TimeoutError:
+                break
+            except socket.timeout:
+                break
+        return DummyOutput(0, output)
 
     def execute_independent(self, command, *params):
-        if isinstance(command, tuple):
-            language, command = command
-        else:
-            language = "bash"  # 默认为 bash
-
+        # print("=== EXECUTING INDEPENDENT ===\n", command)
+        language, command = command
+        # if params:
+        #     print("== Parameters ==\n", params)
         if language == "bash":
-            cmd = command
+            cmd = ["bash", "-c", command]
+            if params:
+                cmd.append("--")
+                cmd.extend(params)
         elif language == "python":
-            cmd = f"python3 -c {json.dumps(command)}"
+            cmd = ["python3", "-c", command, *params]
         elif language == "c++":
-            # 写入 C++ 源代码到文件
-            source_code = json.dumps(command)
-            self.execute(f'echo {source_code} > /tmp/main.cpp && g++ -o /tmp/a.out /tmp/main.cpp')
-            cmd = "/tmp/a.out"
+            self.execute_independent(
+                (
+                    "bash",
+                    f'echo "{json.dumps(command)}" > /tmp/main.cpp && '
+                    f"g++ -o /tmp/a.out /tmp/main.cpp",
+                ),
+                None,
+            )
+            cmd = ["/tmp/a.out", *params]
         elif language == "c":
-            # 写入 C 源代码到文件
-            source_code = json.dumps(command)
-            self.execute(f'echo {source_code} > /tmp/main.c && gcc -o /tmp/a.out /tmp/main.c')
-            cmd = "/tmp/a.out"
+            self.execute_independent(
+                (
+                    "bash",
+                    f'echo "{json.dumps(command)}" > /tmp/main.cpp && '
+                    f"gcc -o /tmp/a.out /tmp/main.cpp",
+                ),
+                None,
+            )
+            cmd = ["/tmp/a.out", *params]
         else:
             raise ValueError("Unsupported language")
-
-        if params:
-            cmd += ' ' + ' '.join(params)
-
-        # 使用 subprocess.run 执行命令
-        result = subprocess.run(
-            cmd,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        return DummyOutput(result.stdout, result.stderr, result.returncode)
+        return self.container.exec_run(cmd)
 
 
 class JudgeConfig:
@@ -134,7 +176,7 @@ Act: answer(220)""",
 
 
 class OSInteraction(Task):
-    def _load_configs(self, config_path, script_root_dir="/root/workspace") -> List[JudgeConfig]:
+    def _load_configs(self, config_path, script_root_dir=".") -> List[JudgeConfig]:
         def load_script(script_obj):
             if script_obj is None:
                 return None
@@ -315,7 +357,7 @@ class OSInteraction(Task):
         file = data_item["file"]
         index_in_file = data_item["index"]
         print("init container")
-        container = Container()
+        container = Container(config.image)
         print("init container ok")
         try:
             print("start judge")
@@ -333,7 +375,10 @@ class OSInteraction(Task):
                 result={"result": False, "error": traceback.format_exc()},
             )
         finally:
-            pass
+            try:
+                container.__del__()
+            except:
+                pass
 
     async def _judge(
         self, session: Session, config: JudgeConfig, container: Container
@@ -476,9 +521,3 @@ If the output is too long, I will truncate it. The truncated output is not compl
         return TaskSampleExecutionResult(
             status=SampleStatus.COMPLETED, result={"result": jd}
         )
-
-
-# if __name__ == "__main__":
-#     container = Container()
-#     result = container.execute("echo Hello, World!")
-#     print(result.output.decode())  # 输出命令执行结果

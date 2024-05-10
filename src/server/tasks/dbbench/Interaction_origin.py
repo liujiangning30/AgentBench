@@ -8,11 +8,31 @@ from typing import Optional, Union, Sequence, Dict, Any
 
 
 class Container:
-    port = 3306
+    port = 13000
     password = "password"
 
     def __init__(self, image: str = "mysql"):
+        self.deleted = False
         self.image = image
+        self.client = docker.from_env()
+        p = Container.port + random.randint(0, 10000)
+        while self.is_port_open(p):
+            p += random.randint(0, 20)
+        self.port = p
+        self.container: containers.Container = self.client.containers.run(
+            image,
+            name=f"mysql_{self.port}",
+            environment={
+                "MYSQL_ROOT_PASSWORD": self.password,
+            },
+            ports={"3306": self.port},
+            detach=True,
+            tty=True,
+            stdin_open=True,
+            remove=True,
+        )
+
+        time.sleep(1)
 
         retry = 0
         while True:
@@ -33,6 +53,17 @@ class Container:
             else:
                 break
             retry += 1
+
+    def delete(self):
+        self.container.stop()
+        self.deleted = True
+
+    def __del__(self):
+        try:
+            if not self.deleted:
+                self.delete()
+        except:
+            pass
 
     def execute(
         self,
@@ -57,6 +88,11 @@ class Container:
         return result
 
     def is_port_open(self, port) -> bool:
+        try:
+            self.client.containers.get(f"mysql_{port}")
+            return True
+        except Exception:
+            pass
         # Create a socket object
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 

@@ -2,8 +2,8 @@ definition:
   task:
     overwrite:
       module: src.client.TaskClient
-      parameters:
-        controller_address: "http://localhost:5000/api"
+      # parameters:
+      #   controller_address: "http://192.168.233.161:5000/api"
     import: ../tasks/task_assembly.yaml
   agent:
     import:

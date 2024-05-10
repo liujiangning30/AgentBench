@@ -2,7 +2,10 @@ default:
   module: "src.client.agents.FastChatAgent"
   parameters:
     name: "FastChat"
-    controller_address: "http://localhost:55555"
+    controller_address: "http://192.168.224.38:21002"
+    # vicuna-7b: 192.168.237.102
+    # vicuna-13b: 192.168.237.147
+    # Llama-2-70b-chat: 192.168.224.38
     max_new_tokens: 512
     temperature: 0
 
@@ -21,3 +24,21 @@ vicuna-13b:
 vicuna-7b:
   parameters:
     model_name: "vicuna-7b-v1.5"
+
+vicuna-33b:
+  parameters:
+    model_name: "vicuna-33b-v1.3"
+
+Llama-2-70b-chat:
+  parameters:
+    model_name: "Llama-2-70b-chat"
+
+Baichuan2-7B-Chat:
+  parameters:
+    model_name: "Baichuan2-7B-Chat"
+    controller_address: "http://192.168.237.102:21002"
+
+Baichuan2-13B-Chat:
+  parameters:
+    model_name: "Baichuan2-13B-Chat"
+    controller_address: "http://192.168.224.38:21002"

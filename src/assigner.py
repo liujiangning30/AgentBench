@@ -25,6 +25,10 @@ import sys
 from tqdm import tqdm
 from tqdm.contrib import DummyTqdmFile
 
+# force to calculate the overall score
+FORCE_FINISH = False
+
+
 @contextlib.contextmanager
 def std_out_err_redirect_tqdm():
     orig_out_err = sys.stdout, sys.stderr
@@ -62,6 +66,9 @@ class Assigner:
         self.completions: Dict[
             str, Dict[str, List[TaskOutput]]
         ] = {}  # {agent: {task: [{index: int, result: JSONSerializable}]}}
+        self.fails: Dict[
+            str, Dict[str, List[TaskOutput]]
+        ] = {}  # {agent: {task: [{index: int, result: JSONSerializable}]}}
         self.finished_count = 0
         self.started_count = 0
         self.running_count = 0
@@ -83,7 +90,8 @@ class Assigner:
             runs_file = os.path.join(self.get_output_dir(agent, task), "runs.jsonl")
             result_file = os.path.join(self.get_output_dir(agent, task), "overall.json")
             if os.path.exists(result_file):
-                continue
+                # continue
+                pass
             if agent not in self.remaining_tasks:
                 self.remaining_tasks[agent] = {}
             if task not in self.remaining_tasks[agent]:
@@ -115,7 +123,7 @@ class Assigner:
                                 f"Warning: {agent}/{task}#{index} is finished, but not in the index list."
                             )
                         )
-
+                self.record_completion(agent, task, index, run.output, FORCE_FINISH)
         count = sum(
             [
                 len(self.remaining_tasks[agent][task])
@@ -299,7 +307,7 @@ class Assigner:
         print(final_message)
 
     def record_completion(
-        self, agent: str, task: str, index: SampleIndex, result: TaskOutput
+        self, agent: str, task: str, index: SampleIndex, result: TaskOutput, force_calculate_overall=False
     ):
         def calculate_overall_worker():
             nonlocal agent, task, index, result
@@ -309,7 +317,8 @@ class Assigner:
                 os.path.join(self.get_output_dir(agent, task), "overall.json"), "w"
             ) as f:
                 f.write(json.dumps(overall, indent=4, ensure_ascii=False))
-
+        if force_calculate_overall:
+            threading.Thread(target=calculate_overall_worker).start()
         overall_calculation = False
         with self.assignment_lock:
             if agent not in self.completions:
@@ -318,7 +327,10 @@ class Assigner:
                 self.completions[agent][task] = []
             result.index = index
             self.completions[agent][task].append(result)
-            if len(self.completions[agent][task]) == len(self.task_indices[task]):
+            num_task_finished = len(self.completions[agent][task])
+            if agent in self.fails and task in self.fails[agent]:
+                num_task_finished += len(self.fails[agent][task])
+            if num_task_finished == len(self.task_indices[task]):
                 overall_calculation = True
         if overall_calculation:
             output_dir = self.get_output_dir(agent, task)
@@ -374,6 +386,13 @@ class Assigner:
             self.tqdm_ordered_by_agent[agent].update(1)
         else:
             target_file = os.path.join(output_folder, "error.jsonl")
+            if agent not in self.fails:
+                self.fails[agent] = {}
+            if task not in self.fails[agent]:
+                self.fails[agent][task] = []
+            if not result.output:
+                result.output.index = index
+            self.fails[agent][task].append(result.output)
         with open(target_file, "a+", encoding="utf-8") as f:
             f.write(write_to_file)
 
@@ -414,8 +433,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "--auto-retry", "-r", action="store_true", dest="retry"
     )
+    parser.add_argument(
+        "--force_finish", type=bool, default=False
+    )
     args = parser.parse_args()
-
+    if args.force_finish:
+        FORCE_FINISH = True
     loader = ConfigLoader()
     config_ = loader.load_from(args.config)
     value = AssignmentConfig.parse_obj(config_)

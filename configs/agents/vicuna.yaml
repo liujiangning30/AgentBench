@@ -1,0 +1,10 @@
+module: src.client.agents.LmdeployAgent
+parameters:
+  model_name: "vicuna"
+  model_url: "http://192.168.237.102:23333"
+  max_new_tokens: 512
+  top_p: 0.8
+  top_k: 100
+  temperature: 0
+  repetition_penalty: 1.0
+  stop_words: ["</s>"]

@@ -1,9 +1,14 @@
 import contextlib
 import time
 import warnings
+import traceback
+import sys
+from copy import deepcopy
+import json
 
 import requests
 from urllib3.exceptions import InsecureRequestWarning
+from requests.exceptions import Timeout, ConnectionError
 
 from src.typings import *
 from src.utils import *
@@ -213,3 +218,97 @@ class HTTPAgent(AgentClient):
                 return self.return_format.format(response=resp)
             time.sleep(_ + 2)
         raise Exception("Failed.")
+
+
+class LmdeployAgent:
+    def __init__(
+        self,
+        model_name,
+        model_url,
+        **kwargs,
+    ) -> None:
+        from lagent.llms.lmdepoly_wrapper import LMDeployClient
+        from lagent.llms.meta_template import INTERNLM2_META as META
+        self.client = LMDeployClient(
+            model_name=model_name,
+            url=model_url,
+            meta_template=META,
+            **kwargs)
+        self.model_name = model_name
+        self.roles_cfg = dict(
+            assistant=dict(
+                begin='<|im_start|>assistant\n',
+                end='<|im_end|>\n'
+            ),
+            user=dict(
+                begin='<|im_start|>user\n',
+                end='<|im_end|>\n'
+            ),
+            environment=dict(
+                begin='<|im_start|>environment\n',
+                end='<|im_end|>\n'
+            )
+        )
+
+    def inference(self, history: List[dict]) -> str:
+        for _ in range(3):
+            try:
+                new_history = []
+                for item in deepcopy(history):
+                    if item['role'] == 'agent':
+                        item['role'] = 'assistant'
+                        webshop_wording = 'Ok.'
+                        kg_wording = 'I have understood your instruction, start please.'
+                        alfworld_wording = 'OK. I will follow your instructions and try my best to solve the task.'
+                        cg_wording = 'Okay, I will play the game with you according to the rules.'
+                        if item['content'] in [webshop_wording, kg_wording, alfworld_wording, cg_wording]:
+                            continue
+                        else:
+                            new_history.append(item)
+                    elif item['role'] == 'user':
+                        role = 'user'
+                        user_content = item['content']
+                        if not isinstance(user_content, str):
+                            user_content = json.dumps(user_content, ensure_ascii=False)
+                        if user_content.startswith('Observation:'):
+                            user_content = user_content.split('Observation:')[1].strip()
+                            # role = 'environment'
+                        if new_history and new_history[-1]['role'] == 'user':
+                            new_history[-1]['content'] += '\n' + user_content
+                        else:
+                            new_history.append(
+                                dict(
+                                    role=role,
+                                    content=user_content
+                                )
+                            )
+                prompt = ''
+                for item in new_history:
+                    role_cfg = self.roles_cfg[item['role']]
+                    temp_str = role_cfg['begin'] + item['content'] + role_cfg['end']
+                    prompt += temp_str
+                prompt += self.roles_cfg['assistant']['begin']
+                for model_state, res, _ in self.client.stream_chat(prompt):
+                    if model_state.value < 0:
+                        raise Exception(
+                            f"Invalid status code {model_state}:\n\n{res}"
+                        )
+                # print('*'*20)
+                # print(new_history)
+                # print('-'*20)
+                # print(prompt)
+                # print('%'*20)
+                # print(res)
+                # print('*'*20)
+                return res
+            # if timeout or connection error, retry
+            except Timeout:
+                print("Timeout, retrying...")
+            except ConnectionError:
+                print("Connection error, retrying...")
+            except Exception as e:
+                exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+                traceback.print_tb(exc_traceback_obj)
+            time.sleep(5)
+        else:
+            raise Exception("Timeout after 3 retries.")

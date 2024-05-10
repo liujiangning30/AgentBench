@@ -2,16 +2,71 @@ import: definition.yaml
 
 concurrency:
   task:
-    dbbench-std: 5
-    os-std: 5
+    webshop-dev: 10
+    webshop-std: 10
+    kg-dev: 20
+    kg-std: 20
+    avalon-dev-naive: 20
+    avalon-dev-single: 20
+    alfworld-dev: 20
+    alfworld-std: 20
+    m2w-dev: 20
+    m2w-std: 20
+    cg-dev: 20
+    cg-std: 20
+    os-dev: 20
+    os-std: 20
+    # ltp-std: 20
+    # dbbench-dev: 20
+    # dbbench-std: 20
   agent:
-    gpt-3.5-turbo-0613: 5
+    # gpt-3.5-turbo-0613: 5
+    # gpt-4-1106-preview: 5
+    # internlm2: 5
+    # Llama-2-70b-chat: 5
+    # Baichuan2-7B-Chat: 5
+    # Baichuan2-13B-Chat: 5
+    qwen1.5: 5
+    # vicuna-7b: 5
+    # vicuna-13b: 5
 
 assignments: # List[Assignment] | Assignment
   - agent: # "task": List[str] | str ,  "agent": List[str] | str
-      - gpt-3.5-turbo-0613
+      # - gpt-3.5-turbo-0613
+      # - gpt-4-1106-preview
+      # - internlm2
+      # - Llama-2-70b-chat
+      # - Baichuan2-7B-Chat
+      # - Baichuan2-13B-Chat
+      - qwen1.5
+      # - vicuna-7b
+      # - vicuna-13b
     task:
-      - dbbench-std
+      - webshop-dev
+      - webshop-std
+      - kg-dev
+      - kg-std
+      - avalon-dev-naive
+      - avalon-dev-single
+      - alfworld-dev
+      - alfworld-std
+      - m2w-dev
+      - m2w-std
+      - cg-dev
+      - cg-std
+      - os-dev
       - os-std
+      # - ltp-std
+      # - dbbench-dev
+      # - dbbench-std
 
-output: "outputs/{TIMESTAMP}"
+# output: "outputs/aliyun_Darwin_100B_B330k_E29k_FT_v1_0_s1_rc47_g512_set256/all/2024-04-24-06-48-48"
+# output: "outputs/puyu102b/all/2024-04-23-12-30-27"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc4/all/2024-05-07-07-28-54"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc6/all/2024-05-07-07-31-26"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc7/all/2024-05-07-07-32-39"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc8/all/2024-05-07-07-38-12"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc9/all/2024-05-08-05-47-00"
+# output: "outputs/vicuna-7b/all/2024-05-06-09-41-10"
+# output: "outputs/Baichuan2-13B-Chat/all/{TIMESTAMP}"
+output: "outputs/Qwen1.5-7B-Chat/all/2024-05-08-08-17-30"

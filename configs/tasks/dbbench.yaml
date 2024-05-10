@@ -1,6 +1,7 @@
 default:
   module: src.server.tasks.dbbench.DBBench
   parameters:
+    controller_address: "http://localhost:5000/api"
     concurrency: 1
     max_round: 15
 

@@ -6,6 +6,23 @@ gpt-3.5-turbo-0613:
             model: "gpt-3.5-turbo-0613"
             max_tokens: 512
 
+gpt-4-1106-preview:
+    import: "./openai-chat.yaml"
+    parameters:
+        name: "gpt-4-1106-preview"
+        body:
+            model: "gpt-4-1106-preview"
+            max_tokens: 512
+
+internlm2:
+    import: "./internlm2.yaml"
+
+qwen1.5:
+    import: "./qwen1.5.yaml"
+
+vicuna:
+    import: "./vicuna.yaml"
+
 text-davinci-003:
     import: "./openai-text.yaml"
     parameters:

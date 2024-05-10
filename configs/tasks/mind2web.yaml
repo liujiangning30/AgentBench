@@ -1,8 +1,9 @@
 default:
   module: src.server.tasks.mind2web.Mind2Web
-  docker:
-    image: longinyu/agentbench-mind2web
+  # docker:
+  #   image: longinyu/agentbench-mind2web
   parameters:
+    controller_address: "http://192.168.224.67:7000/api"
     concurrency: 10
     data:
       data_path: "."

@@ -1,10 +1,11 @@
 default:
   module: src.server.tasks.webshop_docker.WebShop
   parameters:
+    controller_address: "http://192.168.224.83:4000/api"
     concurrency: 1
-  docker:
-    image: longinyu/agentbench-webshop
-    command: ln -s /root/webshop /root/workspace/src/server/tasks/webshop_docker;cp /root/workspace/src/server/tasks/webshop/__init__.py /root/webshop/__init__.py;
+  # docker:
+  #   image: longinyu/agentbench-webshop
+  #   command: ln -s /root/webshop /root/workspace/src/server/tasks/webshop_docker;cp /root/workspace/src/server/tasks/webshop/__init__.py /root/webshop/__init__.py;
 
 webshop-dev:
   parameters:
