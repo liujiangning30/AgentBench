@@ -3,7 +3,7 @@ default:
   # docker:
   #   image: longinyu/agentbench-mind2web
   parameters:
-    controller_address: "http://192.168.224.67:7000/api"
+    controller_address: "http://22.8.32.160:5000/api"
     concurrency: 10
     data:
       data_path: "."

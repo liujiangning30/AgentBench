@@ -73,7 +73,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--auto-controller", "-a", dest="controller", action="store_true"
     )
-    parser.add_argument("--base-port", "-p", dest="port", type=int, default=2000)
+    parser.add_argument("--base-port", "-p", dest="port", type=int, default=6000)
 
     args = parser.parse_args()
 

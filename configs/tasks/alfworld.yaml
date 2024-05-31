@@ -4,7 +4,7 @@ default:
   #   image: longinyu/agentbench-alfworld
   #   command: umask 0; [ -f /root/.setup.sh ] && bash /root/.setup.sh;
   parameters:
-    controller_address: "http://192.168.237.175:5000/api"
+    controller_address: "http://22.8.46.161:4000/api"
     name: alfworld-std
     data_path: "/AgentBench/data/alfworld"
     config_path: "src/server/tasks/alfworld/configs/base_config.yaml"

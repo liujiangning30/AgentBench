@@ -6,8 +6,8 @@ concurrency:
     webshop-std: 10
     kg-dev: 20
     kg-std: 20
-    avalon-dev-naive: 20
-    avalon-dev-single: 20
+    # avalon-dev-naive: 20
+    # avalon-dev-single: 20
     alfworld-dev: 20
     alfworld-std: 20
     m2w-dev: 20
@@ -22,11 +22,11 @@ concurrency:
   agent:
     # gpt-3.5-turbo-0613: 5
     # gpt-4-1106-preview: 5
-    # internlm2: 5
+    internlm2: 5
     # Llama-2-70b-chat: 5
     # Baichuan2-7B-Chat: 5
     # Baichuan2-13B-Chat: 5
-    qwen1.5: 5
+    # qwen1.5: 5
     # vicuna-7b: 5
     # vicuna-13b: 5
 
@@ -34,11 +34,11 @@ assignments: # List[Assignment] | Assignment
   - agent: # "task": List[str] | str ,  "agent": List[str] | str
       # - gpt-3.5-turbo-0613
       # - gpt-4-1106-preview
-      # - internlm2
+      - internlm2
       # - Llama-2-70b-chat
       # - Baichuan2-7B-Chat
       # - Baichuan2-13B-Chat
-      - qwen1.5
+      # - qwen1.5
       # - vicuna-7b
       # - vicuna-13b
     task:
@@ -46,8 +46,8 @@ assignments: # List[Assignment] | Assignment
       - webshop-std
       - kg-dev
       - kg-std
-      - avalon-dev-naive
-      - avalon-dev-single
+      # - avalon-dev-naive
+      # - avalon-dev-single
       - alfworld-dev
       - alfworld-std
       - m2w-dev
@@ -62,11 +62,33 @@ assignments: # List[Assignment] | Assignment
 
 # output: "outputs/aliyun_Darwin_100B_B330k_E29k_FT_v1_0_s1_rc47_g512_set256/all/2024-04-24-06-48-48"
 # output: "outputs/puyu102b/all/2024-04-23-12-30-27"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc4/all/2024-05-07-07-28-54"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc6/all/2024-05-07-07-31-26"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc7/all/2024-05-07-07-32-39"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc8/all/2024-05-07-07-38-12"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc9/all/2024-05-08-05-47-00"
-# output: "outputs/vicuna-7b/all/2024-05-06-09-41-10"
-# output: "outputs/Baichuan2-13B-Chat/all/{TIMESTAMP}"
-output: "outputs/Qwen1.5-7B-Chat/all/2024-05-08-08-17-30"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc17/all/2024-05-29-11-12-19"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc18/all/2024-05-29-11-09-33"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc19/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc20/all/2024-05-29-11-17-52"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc21/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc22/all/2024-05-29-11-30-37"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc23/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc24/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc25/all/2024-05-29-14-13-56"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc26/all/2024-05-29-14-16-20"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc27/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc28/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc29/all/2024-05-29-17-30-52"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc30/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc31/all/2024-05-30-10-54-17"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc32/all/2024-05-30-10-55-59"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc33/all/2024-05-30-10-58-03"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47_s2/all/{TIMESTAMP}"
+# output: "outputs/P-official_volc_Ampere_7B_v1_1_enhance_FT_v1_0_0_s1_rc47_s2_rl/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc1/all/2024-05-27-19-14-18"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc1_s2/all/2024-05-27-19-22-19"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2/all/2024-05-27-13-37-44"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2_s2/all/2024-05-27-13-42-03"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2_s2_0524/all/2024-05-27-13-44-21"
+# output: "outputs/P-volc_Ampere_7B_v1.1_enchance_FT_v1.0.0_s1_0523rc2_s2_0524_rl/all/2024-05-27-13-46-20"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc1/all/2024-05-30-17-35-22"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc2/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc3/all/{TIMESTAMP}"
+output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc5/all/{TIMESTAMP}"

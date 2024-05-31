@@ -1,7 +1,7 @@
 default:
   module: src.server.tasks.webshop_docker.WebShop
   parameters:
-    controller_address: "http://192.168.224.83:4000/api"
+    controller_address: "http://22.8.76.70:3000/api"
     concurrency: 1
   # docker:
   #   image: longinyu/agentbench-webshop

@@ -3,7 +3,7 @@ default:
   # docker:
   #   image: longinyu/agentbench-card_game
   parameters:
-    controller_address: "http://192.168.238.200:7000/api"
+    controller_address: "http://22.8.35.52:6000/api"
     port: 12347
     workers: 10
 

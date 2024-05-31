@@ -1,19 +1,43 @@
 module: src.client.agents.LmdeployAgent
 parameters:
-  model_name: "base"
-  model_url: "http://192.168.224.35:23333"
+  model_name: "internlm2-chat-7b"
+  model_url: "http://22.8.2.7:23333"
   # 47.117.64.181:8001
-  # agentflan-v2_d0424rc1: 192.168.237.147
-  # agentflan-v2_d0424rc2: 192.168.237.102
-  # agentflan-v2_d0424rc4: 192.168.224.35
-  # agentflan-v2_d0424rc5: 192.168.225.191
-  # agentflan-v2_d0424rc6: 192.168.224.38
-  # agentflan-v2_d0424rc7: 192.168.237.102
-  # agentflan-v2_d0424rc8: 192.168.237.147
-  # agentflan-v2_d0424rc9: 192.168.224.35
+  # agentflan-v2_d0424rc16: 
+  # agentflan-v2_d0424rc17: 22.8.34.100
+  # agentflan-v2_d0424rc18: 22.8.79.251
+  # agentflan-v2_d0424rc19: 22.8.70.87
+  # agentflan-v2_d0424rc20: 22.8.44.83
+  # agentflan-v2_d0424rc21: 22.8.21.49
+  # agentflan-v2_d0424rc22: 22.8.75.236
+  # agentflan-v2_d0424rc23: 22.8.44.215
+  # agentflan-v2_d0424rc24: 22.8.70.83
+  # agentflan-v2_d0424rc25: 22.8.79.187
+  # agentflan-v2_d0424rc26: 22.8.79.190
+  # agentflan-v2_d0424rc27: 22.8.70.10
+  # agentflan-v2_d0424rc28: 22.8.17.192
+  # agentflan-v2_d0424rc29: 22.8.14.116
+  # agentflan-v2_d0424rc30: 22.8.74.122
+  # agentflan-v2_d0424rc31: 22.8.45.252
+  # agentflan-v2_d0424rc32: 22.8.65.93
+  # agentflan-v2_d0424rc33: 22.8.43.193
+  # s1_rc47: 22.8.40.94
+  # s1_rc47_s2: 22.8.12.252
+  # s1_rc47_s2_rl: 22.8.32.216
+  # s1_0523rc1: 22.8.77.194
+  # s1_0523rc1_s2: 22.8.12.250
+  # s1_0523rc2: 22.8.75.90
+  # s1_0523rc2_s2: 22.8.10.100
+  # s1_0523rc2_s2_0524: 22.8.0.147
+  # s1_0523rc2_s2_0524_rl: 22.8.68.236
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc1: 22.8.18.28
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc2: 22.8.76.67
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc3: 22.8.28.6
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc5: 22.8.2.7
   max_new_tokens: 512
   top_p: 0.8
   top_k: 100
   temperature: 0
   repetition_penalty: 1.0
   stop_words: ["<|im_end|>"]
+

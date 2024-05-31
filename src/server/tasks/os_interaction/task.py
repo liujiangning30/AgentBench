@@ -31,50 +31,47 @@ class DummyOutput:
 class Container:
     def execute(self, command: str):
         # 使用 subprocess.run 执行命令
-        result = subprocess.run(
-            command,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
+        result = subprocess.run(command, text=True, capture_output=True)
         return DummyOutput(result.stdout, result.stderr, result.returncode)
 
     def execute_independent(self, command, *params):
-        if isinstance(command, tuple):
-            language, command = command
-        else:
-            language = "bash"  # 默认为 bash
-
+        # print("=== EXECUTING INDEPENDENT ===\n", command)
+        language, command = command
+        # if params:
+        #     print("== Parameters ==\n", params)
         if language == "bash":
-            cmd = command
+            cmd = ["bash", "-c", command]
+            if params:
+                cmd.append("--")
+                cmd.extend(params)
         elif language == "python":
-            cmd = f"python3 -c {json.dumps(command)}"
+            cmd = ["python3", "-c", command, *params]
         elif language == "c++":
-            # 写入 C++ 源代码到文件
-            source_code = json.dumps(command)
-            self.execute(f'echo {source_code} > /tmp/main.cpp && g++ -o /tmp/a.out /tmp/main.cpp')
-            cmd = "/tmp/a.out"
+            self.execute_independent(
+                (
+                    "bash",
+                    f'echo "{json.dumps(command)}" > /tmp/main.cpp && '
+                    f"g++ -o /tmp/a.out /tmp/main.cpp",
+                ),
+                None,
+            )
+            cmd = ["/tmp/a.out", *params]
         elif language == "c":
-            # 写入 C 源代码到文件
-            source_code = json.dumps(command)
-            self.execute(f'echo {source_code} > /tmp/main.c && gcc -o /tmp/a.out /tmp/main.c')
-            cmd = "/tmp/a.out"
+            self.execute_independent(
+                (
+                    "bash",
+                    f'echo "{json.dumps(command)}" > /tmp/main.cpp && '
+                    f"gcc -o /tmp/a.out /tmp/main.cpp",
+                ),
+                None,
+            )
+            cmd = ["/tmp/a.out", *params]
         else:
             raise ValueError("Unsupported language")
 
-        if params:
-            cmd += ' ' + ' '.join(params)
-
         # 使用 subprocess.run 执行命令
-        result = subprocess.run(
-            cmd,
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        return DummyOutput(result.stdout, result.stderr, result.returncode)
+        result = self.execute(cmd)
+        return result
 
 
 class JudgeConfig:
