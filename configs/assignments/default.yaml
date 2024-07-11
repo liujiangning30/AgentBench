@@ -4,18 +4,18 @@ concurrency:
   task:
     webshop-dev: 10
     webshop-std: 10
-    kg-dev: 20
-    kg-std: 20
+    # kg-dev: 20
+    # kg-std: 20
     # avalon-dev-naive: 20
     # avalon-dev-single: 20
-    alfworld-dev: 20
-    alfworld-std: 20
-    m2w-dev: 20
-    m2w-std: 20
-    cg-dev: 20
-    cg-std: 20
-    os-dev: 20
-    os-std: 20
+    # alfworld-dev: 20
+    # alfworld-std: 20
+    # m2w-dev: 20
+    # m2w-std: 20
+    # cg-dev: 20
+    # cg-std: 20
+    # os-dev: 20
+    # os-std: 20
     # ltp-std: 20
     # dbbench-dev: 20
     # dbbench-std: 20
@@ -44,44 +44,49 @@ assignments: # List[Assignment] | Assignment
     task:
       - webshop-dev
       - webshop-std
-      - kg-dev
-      - kg-std
+      # - kg-dev
+      # - kg-std
       # - avalon-dev-naive
       # - avalon-dev-single
-      - alfworld-dev
-      - alfworld-std
-      - m2w-dev
-      - m2w-std
-      - cg-dev
-      - cg-std
-      - os-dev
-      - os-std
+      # - alfworld-dev
+      # - alfworld-std
+      # - m2w-dev
+      # - m2w-std
+      # - cg-dev
+      # - cg-std
+      # - os-dev
+      # - os-std
       # - ltp-std
       # - dbbench-dev
       # - dbbench-std
 
 # output: "outputs/aliyun_Darwin_100B_B330k_E29k_FT_v1_0_s1_rc47_g512_set256/all/2024-04-24-06-48-48"
-# output: "outputs/puyu102b/all/2024-04-23-12-30-27"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc17/all/2024-05-29-11-12-19"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc18/all/2024-05-29-11-09-33"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc19/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc20/all/2024-05-29-11-17-52"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc21/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc22/all/2024-05-29-11-30-37"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc23/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc24/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc25/all/2024-05-29-14-13-56"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc26/all/2024-05-29-14-16-20"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc27/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc28/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc29/all/2024-05-29-17-30-52"
 # output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc30/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc31/all/2024-05-30-10-54-17"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc32/all/2024-05-30-10-55-59"
-# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc33/all/2024-05-30-10-58-03"
-# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47_s2/all/{TIMESTAMP}"
-# output: "outputs/P-official_volc_Ampere_7B_v1_1_enhance_FT_v1_0_0_s1_rc47_s2_rl/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_internlm2.5_rc5_tool_agentflan-v2_d0424rc37/all/2024-06-04-20-51-21"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc43/all/2024-06-05-10-46-16"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc44/all/2024-06-05-10-49-38"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc45/all/2024-06-05-14-11-01"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc46/all/2024-06-05-14-15-00"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc47/all/2024-06-05-17-34-24"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc48/all/2024-06-05-17-36-52"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc49/all/2024-06-05-17-38-46"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc49/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc50/all/2024-06-05-17-41-05"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc51/all/2024-06-06-10-26-22"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc52/all/2024-06-06-17-48-59"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc53/all/2024-06-06-17-50-21"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc54/all/2024-06-07-09-36-20"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc55/all/2024-06-07-09-38-47"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0424rc56/all/2024-06-10-22-38-58"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0617rc1/all/2024-06-17-15-20-18"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0617rc2/all/2024-06-17-15-22-43"
+# output: "outputs/aliyun_Ampere_7B_FT_agentflan-v2_d0617rc3/all/2024-06-18-17-47-00"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240614rc8_s2_agentflan-v2_d0617rc3/all/2024-06-18-20-41-26"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240614rc8_s2_agentflan-v2_d0617rc5/all/2024-06-19-10-51-16"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0530rc9_s2_webrc12/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47/all/2024-05-27-20-54-22"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47_s2/all/2024-05-27-19-11-09"
+# output: "outputs/P-official_volc_Ampere_7B_v1_1_enhance_FT_v1_0_0_s1_rc47_s2_rl/all/2024-05-27-20-45-03"
 # output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc1/all/2024-05-27-19-14-18"
 # output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc1_s2/all/2024-05-27-19-22-19"
 # output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2/all/2024-05-27-13-37-44"
@@ -89,6 +94,30 @@ assignments: # List[Assignment] | Assignment
 # output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2_s2_0524/all/2024-05-27-13-44-21"
 # output: "outputs/P-volc_Ampere_7B_v1.1_enchance_FT_v1.0.0_s1_0523rc2_s2_0524_rl/all/2024-05-27-13-46-20"
 # output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc1/all/2024-05-30-17-35-22"
-# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc2/all/{TIMESTAMP}"
-# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc3/all/{TIMESTAMP}"
-output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc5/all/{TIMESTAMP}"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc2/all/2024-05-30-17-37-11"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc3/all/2024-05-30-17-39-11"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc4/all/2024-06-04-15-31-50"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc5/all/2024-05-31-16-09-15"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc6/all/2024-05-31-22-20-49"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc7/all/2024-05-31-22-23-20"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc8/all/2024-06-05-20-01-35"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc9/all/2024-06-05-20-04-29"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc5_s2_20240531rc1/all/2024-05-31-22-26-08"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc6_s2_20240531rc1/all/2024-05-31-22-28-45"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc7_s2_20240531rc1/all/2024-05-31-22-30-48"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc10/all/2024-06-08-23-09-23"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc10_s2_20240607rc4/all/2024-06-08-23-12-49"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc10_s2_20240607rc5/all/2024-06-08-23-15-18"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_20240607rc1/all/2024-06-08-23-17-34"
+# output: "outputs/aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240607rc1_s2_20240607rc6/all/2024-06-08-23-20-22"
+# output: "outputs/P-volc_Ampere_7B_v1_1_enchance_FT_s1_20240530rc10_s2_20240607rc4_rl_20240607rc1/all/2024-06-11-12-05-17"
+# output: "outputs/P-volc_Ampere_7B_v1_1_enchance_FT_s1_20240530rc10_s2_20240607rc5_rl_20240607rc1/all/2024-06-11-12-02-03"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240614rc1/all/2024-06-12-12-03-20"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240607rc1_s2_20240612rc3/all/2024-06-13-11-24-51"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240607rc1_s2_20240612rc4/all/2024-06-13-11-37-58"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240614rc8_s2_20240612rc8/all/2024-06-15-13-14-46"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240614rc8_s2_20240617rc1/all/2024-06-18-15-06-14"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc8/all/2024-06-21-12-03-16"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc9/all/2024-06-21-12-04-59"
+# output: "outputs/aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc10/all/2024-06-21-12-00-20"
+output: "outputs/test/all/{TIMESTAMP}"

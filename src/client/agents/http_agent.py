@@ -225,15 +225,26 @@ class LmdeployAgent:
         self,
         model_name,
         model_url,
+        model_path,
         **kwargs,
     ) -> None:
-        from lagent.llms.lmdepoly_wrapper import LMDeployClient
+        from lagent.llms.lmdepoly_wrapper import LMDeployClient, LMDeployPipeline
         from lagent.llms.meta_template import INTERNLM2_META as META
-        self.client = LMDeployClient(
-            model_name=model_name,
-            url=model_url,
-            meta_template=META,
-            **kwargs)
+
+        if model_path:
+            self.client = LMDeployPipeline(
+                path=model_path,
+                meta_template=META,
+                model_name=model_name,
+                tp=1,
+                **kwargs
+            )
+        else:
+            self.client = LMDeployClient(
+                model_name=model_name,
+                url=model_url,
+                meta_template=META,
+                **kwargs)
         self.model_name = model_name
         self.roles_cfg = dict(
             assistant=dict(
@@ -288,18 +299,7 @@ class LmdeployAgent:
                     temp_str = role_cfg['begin'] + item['content'] + role_cfg['end']
                     prompt += temp_str
                 prompt += self.roles_cfg['assistant']['begin']
-                for model_state, res, _ in self.client.stream_chat(prompt):
-                    if model_state.value < 0:
-                        raise Exception(
-                            f"Invalid status code {model_state}:\n\n{res}"
-                        )
-                # print('*'*20)
-                # print(new_history)
-                # print('-'*20)
-                # print(prompt)
-                # print('%'*20)
-                # print(res)
-                # print('*'*20)
+                res = self.client.generate(prompt)
                 return res
             # if timeout or connection error, retry
             except Timeout:

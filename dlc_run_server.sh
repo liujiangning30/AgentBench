@@ -22,7 +22,7 @@ mysql_port=3306
 
 task_kg="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-alfworld,cd /root/workspace && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench,kg-dev 20 kg-std 20,1000"
 task_avalon="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-alfworld,cd /root/workspace && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench,avalon-dev-naive 20 avalon-dev-single 20,7000"
-task_os="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-alfworld,cd /root/workspace && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench,os-dev 20 os-std 20,2000"
+task_os="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-alfworld,cd /root/workspace && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench,os-dev 20 os-std 20,7000"
 task_webshop="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-webshop,cd /root/workspace,webshop-dev 10 webshop-std 10,3000"
 task_alfworld="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-alfworld,cd /root/workspace,alfworld-dev_20_alfworld-std_20,4000"
 task_m2w="pjlab-wulan-acr-registry-vpc.cn-wulanchabu.cr.aliyuncs.com/pjlab-eflops/liukuikun:agentbench-mind2web,cd /root/workspace,m2w-dev 20 m2w-std 20,5000"
@@ -31,7 +31,7 @@ task_ltp="docker.io/longinyu/agentbench-ltp,cd /root/workspace,ltp-dev 20 ltp-st
 task_db="docker.io/liujiangning30/agentbench-mysql:latest,cd /cpfs01/user/liujiangning/work/AgentBench && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench,dbbench-dev 20 dbbench-std 20"
 
 # export MYSQL_ROOT_PASSWORD=$mysql_password && export MYSQL_TCP_PORT=$mysql_port && 
-tasks=$task_kg
+tasks=$task_webshop
 COMMAND="{work_env} && python -c 'import socket; print(socket.gethostbyname(socket.gethostname()))' && python -m src.start_task -a -s {start} -p {port}"
 
 update_command() {

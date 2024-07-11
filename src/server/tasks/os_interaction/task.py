@@ -421,6 +421,7 @@ If the output is too long, I will truncate it. The truncated output is not compl
                 answer = content
                 break
             elif action == "bash":
+                content = ['bash', '-c', content]
                 result = await asyncio.to_thread(container.execute, content)
                 result = result.output.decode("utf-8")
                 if len(result) > 800:

@@ -433,15 +433,18 @@ if __name__ == "__main__":
     parser.add_argument(
         "--auto-retry", "-r", action="store_true", dest="retry"
     )
-    # parser.add_argument(
-    #     "--model_name", "-n", type=str
-    # )
-    # parser.add_argument(
-    #     "--model_url", "-l", type=str
-    # )
-    # parser.add_argument(
-    #     "--output", "-o", type=str
-    # )
+    parser.add_argument(
+        "--model_name", "-n", type=str
+    )
+    parser.add_argument(
+        "--model_url", "-l", type=str
+    )
+    parser.add_argument(
+        "--model_path", "-p", type=str
+    )
+    parser.add_argument(
+        "--output", "-o", type=str
+    )
     parser.add_argument(
         "--force_finish", type=bool, default=False
     )
@@ -451,12 +454,14 @@ if __name__ == "__main__":
     loader = ConfigLoader()
     config_ = loader.load_from(args.config)
 
-    # if args.model_name:
-    #     config_['definition']['agent']['internlm2']['parameters']['model_name'] = args.model_name
-    # if args.model_url:
-    #     config_['definition']['agent']['internlm2']['parameters']['model_url'] = args.model_url
-    # if args.output:
-    #     config_['output'] = args.output
+    if args.model_name:
+        config_['definition']['agent']['internlm2']['parameters']['model_name'] = args.model_name
+    if args.model_url:
+        config_['definition']['agent']['internlm2']['parameters']['model_url'] = args.model_url
+    if args.model_path:
+        config_['definition']['agent']['internlm2']['parameters']['model_path'] = args.model_path
+    if args.output:
+        config_['output'] = args.output
 
     value = AssignmentConfig.parse_obj(config_)
     value = AssignmentConfig.post_validate(value)

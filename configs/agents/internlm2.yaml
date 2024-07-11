@@ -1,39 +1,56 @@
 module: src.client.agents.LmdeployAgent
 parameters:
   model_name: "internlm2-chat-7b"
-  model_url: "http://22.8.2.7:23333"
+  model_url: ""
+  model_path: ""
   # 47.117.64.181:8001
-  # agentflan-v2_d0424rc16: 
-  # agentflan-v2_d0424rc17: 22.8.34.100
-  # agentflan-v2_d0424rc18: 22.8.79.251
-  # agentflan-v2_d0424rc19: 22.8.70.87
-  # agentflan-v2_d0424rc20: 22.8.44.83
-  # agentflan-v2_d0424rc21: 22.8.21.49
-  # agentflan-v2_d0424rc22: 22.8.75.236
-  # agentflan-v2_d0424rc23: 22.8.44.215
-  # agentflan-v2_d0424rc24: 22.8.70.83
-  # agentflan-v2_d0424rc25: 22.8.79.187
-  # agentflan-v2_d0424rc26: 22.8.79.190
-  # agentflan-v2_d0424rc27: 22.8.70.10
-  # agentflan-v2_d0424rc28: 22.8.17.192
-  # agentflan-v2_d0424rc29: 22.8.14.116
-  # agentflan-v2_d0424rc30: 22.8.74.122
-  # agentflan-v2_d0424rc31: 22.8.45.252
-  # agentflan-v2_d0424rc32: 22.8.65.93
-  # agentflan-v2_d0424rc33: 22.8.43.193
-  # s1_rc47: 22.8.40.94
-  # s1_rc47_s2: 22.8.12.252
-  # s1_rc47_s2_rl: 22.8.32.216
-  # s1_0523rc1: 22.8.77.194
-  # s1_0523rc1_s2: 22.8.12.250
-  # s1_0523rc2: 22.8.75.90
-  # s1_0523rc2_s2: 22.8.10.100
-  # s1_0523rc2_s2_0524: 22.8.0.147
-  # s1_0523rc2_s2_0524_rl: 22.8.68.236
-  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc1: 22.8.18.28
-  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc2: 22.8.76.67
-  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc3: 22.8.28.6
-  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc5: 22.8.2.7
+  # internlm2.5_rc5_tool_agentflan-v2_d0424rc37: 22.8.64.167
+  # agentflan-v2_d0424rc43: 22.8.10.70
+  # agentflan-v2_d0424rc44: 22.8.40.121
+  # agentflan-v2_d0424rc45: 22.8.75.212
+  # agentflan-v2_d0424rc46: 22.8.75.213
+  # agentflan-v2_d0424rc47: 22.8.72.52
+  # agentflan-v2_d0424rc48: 22.8.6.187
+  # agentflan-v2_d0424rc49: 22.9.38.214
+  # agentflan-v2_d0424rc50: 22.8.6.185
+  # agentflan-v2_d0424rc51: 22.8.10.66
+  # agentflan-v2_d0424rc52: 22.8.26.241
+  # agentflan-v2_d0424rc53: 22.8.10.68
+  # agentflan-v2_d0424rc54: 22.8.8.201
+  # agentflan-v2_d0424rc55: 22.8.22.67
+  # agentflan-v2_d0424rc56: 22.8.76.68
+  # agentflan-v2_d0617rc1: 22.8.22.109
+  # agentflan-v2_d0617rc2: 22.8.32.226
+  # agentflan-v2_d0617rc3: 22.8.45.71
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240614rc8_s2_agentflan-v2_d0617rc3: 22.8.22.109
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240614rc8_s2_agentflan-v2_d0617rc5: 22.8.10.97
+  # aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0530rc9_s2_webrc12: 22.8.75.250
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc7: 22.8.71.142
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc8: 22.8.40.214
+  # aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc9: 22.8.76.61
+  # aliyun_internlm2_5_7B_FT_s1_20240614rc1: 22.8.76.71
+  # aliyun_internlm2_5_7B_FT_s1_20240607rc1_s2_20240612rc3: 22.8.15.54
+  # aliyun_internlm2_5_7B_FT_s1_20240607rc1_s2_20240612rc4: 22.8.17.167
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_0607rc1_s2_0613rc1: 22.8.29.67
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_0607rc1_s2_0613rc2: 22.8.42.96
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_0607rc1_s2_0613rc3: 
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_0607rc1_s2_0613rc4: 22.8.76.36
+  # aliyun_Ampere_7B_v1_1_enchance_FT_s1_0607rc1_s2_0613rc5: 22.8.30.142
+  # aliyun_internlm2_5_7B_FT_s1_20240614rc8_s2_20240612rc8: 22.8.2.61
+  # aliyun_internlm2_5_7B_FT_s1_20240614rc8_s2_20240617rc1: 22.8.35.123
+  # aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc8: 22.8.22.105
+  # aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc9: 22.8.22.110
+  # aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc10: 22.8.32.190
+  
+  # aliyun_internlm2_5_boost1_7B_FT_s1_20240621rc10_s2_20240612rc11: 22.8.43.244
+  # aliyun_internlm2_5_boost1_7B_FT_s1_20240621rc11_s2_20240612rc11: 22.8.4.113
+  # aliyun_internlm2_5_boost1_7B_FT_s1_20240621rc11_s2_20240612rc12: 22.8.5.215
+  # aliyun_internlm2_5_boost1_7B_FT_s1_20240621rc11_s2_20240612rc13: 22.8.4.118
+  # aliyun_internlm2_5_boost1_256k_rope50m_7B_FT_s1_20240621rc11_s2_20240612rc11: 22.8.67.0
+  # aliyun_internlm2_5_boost1_256k_rope50m_7B_FT_s1_20240621rc11_s2_20240612rc13: 22.8.23.207
+  # P-volc_internlm2_5_boost1_7B_FT_s1_20240621rc11_s2_20240612rc13_rl_20240622rc1_280: 22.8.13.10
+  # P-volc_internlm2_5_boost1_7B_FT_s1_20240621rc11_s2_20240612rc13_rl_20240622rc1_320: 22.8.1.176
+  # P-volc_internlm2_5_boost1_7B_FT_s1_20240621rc11_s2_20240612rc13_rl_20240622rc1_360: 22.8.1.180
   max_new_tokens: 512
   top_p: 0.8
   top_k: 100
