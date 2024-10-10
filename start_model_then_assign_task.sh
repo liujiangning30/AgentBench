@@ -5,13 +5,11 @@ model_path=$2
 output_path=$3
 force_finish=$4
 
-# 定义timestamp变量
-TIMESTAMP=$(date +"%Y%m%d%H%M%S")
 
 # 启动第一个进程
 {
   export HOME=/cpfs01/user/liujiangning
-  . /cpfs01/user/liujiangning/miniconda3/bin/activate
+  . /cpfs01/user/liujiangning/miniconda3/bin/activate base
   conda activate lmdeploy
   lmdeploy serve api_server --model-name $model_name --model-format hf --tp 1 $model_path
 } &
@@ -26,9 +24,9 @@ sleep 60
 {
   export HOME=/cpfs01/user/liujiangning
   cd /cpfs01/user/liujiangning/work/AgentBench
-  . /cpfs01/user/liujiangning/miniconda3/bin/activate
+  . /cpfs01/user/liujiangning/miniconda3/bin/activate base
   conda activate agent-bench
-  python -m src.assigner --force_finish $force_finish --model_name $model_name --model_url http://127.0.0.1:23333 --output ${output_path}/${TIMESTAMP}
+  python -m src.assigner --force_finish $force_finish --model_name $model_name --model_url http://127.0.0.1:23333 --output ${output_path}
 } &
 
 # 保存第二个进程的PID

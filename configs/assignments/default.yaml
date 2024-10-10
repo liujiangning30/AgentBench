@@ -4,18 +4,18 @@ concurrency:
   task:
     webshop-dev: 10
     webshop-std: 10
-    # kg-dev: 20
-    # kg-std: 20
+    kg-dev: 20
+    kg-std: 20
     # avalon-dev-naive: 20
     # avalon-dev-single: 20
-    # alfworld-dev: 20
-    # alfworld-std: 20
-    # m2w-dev: 20
-    # m2w-std: 20
-    # cg-dev: 20
-    # cg-std: 20
-    # os-dev: 20
-    # os-std: 20
+    alfworld-dev: 20
+    alfworld-std: 20
+    m2w-dev: 20
+    m2w-std: 20
+    cg-dev: 20
+    cg-std: 20
+    os-dev: 20
+    os-std: 20
     # ltp-std: 20
     # dbbench-dev: 20
     # dbbench-std: 20
@@ -44,18 +44,18 @@ assignments: # List[Assignment] | Assignment
     task:
       - webshop-dev
       - webshop-std
-      # - kg-dev
-      # - kg-std
+      - kg-dev
+      - kg-std
       # - avalon-dev-naive
       # - avalon-dev-single
-      # - alfworld-dev
-      # - alfworld-std
-      # - m2w-dev
-      # - m2w-std
-      # - cg-dev
-      # - cg-std
-      # - os-dev
-      # - os-std
+      - alfworld-dev
+      - alfworld-std
+      - m2w-dev
+      - m2w-std
+      - cg-dev
+      - cg-std
+      - os-dev
+      - os-std
       # - ltp-std
       # - dbbench-dev
       # - dbbench-std

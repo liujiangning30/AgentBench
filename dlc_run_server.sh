@@ -31,7 +31,7 @@ task_ltp="docker.io/longinyu/agentbench-ltp,cd /root/workspace,ltp-dev 20 ltp-st
 task_db="docker.io/liujiangning30/agentbench-mysql:latest,cd /cpfs01/user/liujiangning/work/AgentBench && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench,dbbench-dev 20 dbbench-std 20"
 
 # export MYSQL_ROOT_PASSWORD=$mysql_password && export MYSQL_TCP_PORT=$mysql_port && 
-tasks=$task_webshop
+tasks=$task_kg
 COMMAND="{work_env} && python -c 'import socket; print(socket.gethostbyname(socket.gethostname()))' && python -m src.start_task -a -s {start} -p {port}"
 
 update_command() {

@@ -24,36 +24,24 @@ force_finish=False
 # ** NOET ** 
 # TASK_CMD="cd /cpfs01/user/liujiangning/work/AgentBench && . /cpfs01/user/liujiangning/miniconda3/bin/activate && conda activate agent-bench && python -m src.assigner --force_finish $force_finish --model_name internlm2-chat-7b --model_path /cpfs02/llm/shared/public/zhaoqian/ckpt/7B/240623/P-volc_internlm2_5_boost1_7B_FT_merge_fuck_bbh_v2 --output outputs/internlm2_5_boost1_7B_FT_merge_fuck_bbh_v2/all/{TIMESTAMP}"
 
-TASK_CMD="cd /cpfs01/user/liujiangning/work/AgentBench && chmod +x start_model_then_assign_task.sh && ./start_model_then_assign_task.sh internlm2-chat-7b /cpfs02/llm/shared/public/zhaoqian/ckpt/7B/240623/P-volc_internlm2_5_boost1_7B_FT_merge_fuck_bbh_v2 outputs/internlm2_5_boost1_7B_FT_merge_fuck_bbh_v2/all false"
+# TIMESTAMP=$(date +"%Y-%m-%d-%H-%M-%S")
+TIMESTAMP=2024-09-20-13-50-10
+model_name=internlm2-chat-7b
+model_path=/cpfs01/shared/public/public_hdd/llmeval/model_weights/hf_hub/models--internlm--internlm2_5-7b-chat/snapshots/9b8d9553846ecf6393f3408fa9d3ec9928fdab4d
+output_path=outputs/internlm2_5-7b-chat/all/${TIMESTAMP}
+
+TIMESTAMP=2024-09-20-13-57-19
+model_path=/cpfs01/shared/public/public_hdd/llmeval/model_weights/hf_hub/models--internlm--internlm2-chat-7b/snapshots/70e6cdc9643ce7e3d9a369fb984dc5f1a1b2cec6
+output_path=outputs/internlm2-chat-7b/all/${TIMESTAMP}
+
+# TIMESTAMP=$(date +"%Y-%m-%d-%H-%M-%S")
+TIMESTAMP=2024-09-25-10-12-49
+model_path=/cpfs02/llm/shared/public/zhaoqian/ckpt/7B/240623/P-volc_internlm2_5_boost1_7B_FT_merge_boost_bbh_v2
+output_path=outputs/internlm2_5_boost1_7B_FT_merge_boost_bbh_v2/all/${TIMESTAMP}
+TASK_CMD="cd /cpfs01/user/liujiangning/work/AgentBench && chmod +x start_model_then_assign_task.sh && ./start_model_then_assign_task.sh ${model_name} ${model_path} ${output_path} false"
 
 task_name=all
-# aliyun_Ampere_7B_FT_agentflan-v2_d0424rc1
-# aliyun_Ampere_7B_FT_agentflan-v2_d0424rc14
-# aliyun_Ampere_7B_FT_agentflan-v2_d0424rc15
-# aliyun_Ampere_7B_FT_agentflan-v2_d0617rc1
-# vicuna-13b, Baichuan2-7B-Chat, Llama-2-70b-chat, Qwen1.5-7B-Chat
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_rc47_s2
-# P-official_volc_Ampere_7B_v1_1_enhance_FT_v1_0_0_s1_rc47_s2_rl
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc1
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc1_s2
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2_s2
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0523rc2_s2_0524
-# P-volc_Ampere_7B_v1.1_enchance_FT_v1.0.0_s1_0523rc2_s2_0524_rl
-# aliyun_Ampere_7B_v1_1_enchance_FT_20240530rc1
-# aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc5_s2_20240531rc1
-# aliyun_Ampere_7B_v1_1_enchance_FT_v1_0_0_s1_0530rc9_s2_webrc12
-# aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240530rc10_s2_20240607rc4
-# aliyun_Ampere_7B_v1_1_enchance_FT_20240607rc1
-# aliyun_Ampere_7B_v1_1_enchance_FT_s1_20240607rc1_s2_20240607rc6
-# aliyun_internlm2_5_7B_FT_s1_20240614rc1
-# aliyun_internlm2_5_7B_FT_s1_20240607rc1_s2_20240612rc3
-# aliyun_internlm2_5_7B_FT_s1_20240614rc8_s2_20240612rc8
-# aliyun_internlm2_5_7B_FT_s1_20240614rc8_s2_20240617rc1
-# aliyun_internlm2_5_7B_FT_s1_20240621rc6_s2_20240612rc10
-model_name=agentbenchv2-assigner-internlm2_5_boost1_7B_FT_merge_fuck_bbh_v2
-JOB_NAME="$model_name-$task_name"
+JOB_NAME="agentbenchv2-$model_name-$task_name"
 
 ${DLC_PATH} submit pytorchjob --config ${DLC_CONFIG_PATH} \
 --name $JOB_NAME \

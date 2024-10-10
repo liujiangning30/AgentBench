@@ -1,9 +1,9 @@
 default:
   module: "src.server.tasks.knowledgegraph.KnowledgeGraph"
   parameters:
-    controller_address: "http://22.8.78.153:1000/api"
+    controller_address: "http://22.8.24.41:1000/api"
     round: 15
-    sparql_url: "http://164.107.116.56:3093/sparql"
+    sparql_url: "http://22.9.40.130:3001/sparql"
 
 kg-dev:
   parameters:

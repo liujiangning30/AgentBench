@@ -1,7 +1,7 @@
 os-dev:
   module: "src.server.tasks.os_interaction.OSInteraction"
   parameters:
-    controller_address: "http://22.8.46.162:7000/api"
+    controller_address: "http://22.8.24.241:7000/api"
     name: "os-dev"
     concurrency: 24
     round_limit: 8
@@ -25,7 +25,7 @@ os-dev:
 os-std:
   module: "src.server.tasks.os_interaction.OSInteraction"
   parameters:
-    controller_address: "http://22.8.46.162:7000/api"
+    controller_address: "http://22.8.24.241:7000/api"
     name: "os-std"
     concurrency: 24
     round_limit: 8
